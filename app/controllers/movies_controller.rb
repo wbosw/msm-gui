@@ -33,8 +33,19 @@ class MoviesController < ApplicationController
     #populate each column with user input
     #save
     #ridirect back to /movie url
-
-    
   end
+
+def destroy
+the_id = params.fetch("an_id")
+
+matching_record = Movie.where({:id => the_id})
+
+the_movie = matching_record.at(0)
+
+the_movie.destroy
+
+  redirect_to("/movies")
+end
+
 
 end
