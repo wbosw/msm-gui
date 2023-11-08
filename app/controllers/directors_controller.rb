@@ -36,4 +36,45 @@ class DirectorsController < ApplicationController
 
     render({ :template => "director_templates/eldest" })
   end
+
+  def create
+    #Create new director
+    new_d = Director.new
+    #Grab the params
+    new_d.name = params.fetch("the_name")
+    new_d.dob = params.fetch("the_dob")
+    new_d.bio = params.fetch("the_bio")
+    new_d.image = params.fetch("the_image")
+    #save
+    new_d.save
+    #redirect
+    redirect_to("/directors")
+  end
+
+  def destroy
+  #define the director
+  the_d = params.fetch("an_id")
+  # find the record
+  to_destroy = Director.all.where({ :id => the_d}).at(0)
+  #destroy
+  to_destroy.destroy
+  #redirect
+    redirect_to("/directors")
+  end
+
+  def update
+    #who are they trying to update
+    the_d = params.fetch("an_id")
+
+    the_update = Director.all.where(:id => the_d).at(0)
+    #grab new data
+    the_update.name = params.fetch("the_name")
+
+    #save
+    the_update.save
+    #redirect
+    redirect_to("/directors/#{the_d}")
+    
+  end
+
 end
