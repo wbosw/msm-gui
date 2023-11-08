@@ -69,7 +69,9 @@ class DirectorsController < ApplicationController
     the_update = Director.all.where(:id => the_d).at(0)
     #grab new data
     the_update.name = params.fetch("the_name")
-
+    the_update.dob = params.fetch("the_dob")
+    the_update.bio = params.fetch("the_bio")
+    the_update.image = params.fetch("the_image")
     #save
     the_update.save
     #redirect

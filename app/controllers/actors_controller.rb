@@ -40,5 +40,22 @@ class ActorsController < ApplicationController
     redirect_to("/actors")
   end
 
+  def update
+  #determine with actor you are updating
+    the_id = params.fetch("an_id")
+    #find that record
+    the_actor = Actor.all.where(:id => the_id).at(0)
+    #update info from form
+    the_actor.name = params.fetch("the_name")
+    the_actor.dob = params.fetch("the_dob")
+    the_actor.bio = params.fetch("the_bio")
+    the_actor.image = params.fetch("the_image")
+
+    #save
+    the_actor.save
+  #redirect
+  redirect_to("/actors/#{the_id}")
+  end
+
 
 end

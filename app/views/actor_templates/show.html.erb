@@ -7,9 +7,40 @@
 </a>
 
 <div>
-<a href="/delete_actor/<%= @the_actor.id %>">Delete actor</a>
+<a href="/delete_actor/<%= @the_actor.id %>" method = "get">Delete actor</a>
 </div>
 
+<hr>
+
+<form action="/update_actor/<%= @the_actor.id %>" method="post">
+
+<div>
+<label for="name">Name</label>
+<input type="text" name="the_name" id="name" value = <%= 
+@the_actor.name %>>
+</div>
+
+<div>
+<label for="dob">Dob</label>
+<input type="date" name="the_dob" id="dob" value = <%= 
+@the_actor.dob %>>
+</div>
+
+<div>
+<label for="bio">Bio</label>
+<input type="text" name="the_bio" id="bio" value = <%= 
+@the_actor.bio %>>
+</div>
+
+<div>
+<label for="image">Image</label>
+<input type="text" name="the_image" id="image" value = <%= 
+@the_actor.image %>>
+</div>
+
+<button>Update actor</button>
+
+</form>
 <hr>
 
 <dl>
@@ -108,8 +139,12 @@
         <% matching_directors = Director.where({ :id => d_id }) %>
         
         <% the_director = matching_directors.at(0) %>
-
-        <%= the_director.name %>
+        <% if the_director == nil %>
+          HERE!!!!!
+          <% else %>
+          <%= the_director.name %>
+        <% end %>
+        
       </td>
 
       <td>
